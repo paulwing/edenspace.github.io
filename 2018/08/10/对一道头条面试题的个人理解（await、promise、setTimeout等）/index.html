@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="启式空间">
 <meta property="og:description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-10T12:33:05.000Z">
+<meta property="og:updated_time" content="2018-08-10T12:35:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对一道头条面试题的个人理解（await、promise、setTimeout等）">
 <meta name="twitter:description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
@@ -93,37 +93,19 @@
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">async function async1()&#123;</span><br><span class="line">    console.log(&apos;async1 start&apos;)</span><br><span class="line">    await async2()</span><br><span class="line">    console.log(&apos;async1 end&apos;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function async2()&#123;</span><br><span class="line">    console.log(&apos;async2&apos;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(&apos;script start&apos;)</span><br><span class="line"></span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    console.log(&apos;setTimeout&apos;)</span><br><span class="line">&#125;,0) </span><br><span class="line"></span><br><span class="line">async1();</span><br><span class="line"></span><br><span class="line">new Promise(function(resolve)&#123;</span><br><span class="line">    console.log(&apos;promise1&apos;)</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function()&#123;</span><br><span class="line">    console.log(&apos;promise2&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(&apos;script end&apos;)</span><br></pre></td></tr></table></figure>
 <hr>
-<p>先输出：</p>
-<blockquote>
-<p>script start<br>async1 start<br>async2</p>
-</blockquote>
-<p>至此，函数async2执行完成，返回一个promise对象（但由于await的异步机制，该对象的resolve()作为微任务进入异步队列），async1直接跳出，继续输出：</p>
-<blockquote>
-<p>promise1<br>script end</p>
-</blockquote>
+<p>先输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">script start  </span><br><span class="line">async1 start  </span><br><span class="line">async2</span><br></pre></td></tr></table></figure></p>
+<p>至此，函数async2执行完成，返回一个promise对象（但由于await的异步机制，该对象的resolve()作为微任务进入异步队列），async1直接跳出，继续输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">promise1  </span><br><span class="line">script end</span><br></pre></td></tr></table></figure></p>
 <p><em>（注：输出’promise1’后执行resolve，向微任务队列增加一个异步事件<br>console.log(‘promise2’)，此时微任务队列中存了两个事件）</em>  </p>
-<p>至此，同步任务全部完成，js引擎空闲，开始轮询异步事件队列，首先取到的是微任务队列中的第一个任务：async2返回的那个promise对象的resolve()，执行该任务，对应的promise对象的状态变为Resolved，于是又向微任务队列中增加一个事件（也就是第三个任务）：promise.then()，而这个then执行的就是async1中后续代码，即本例中 console.log(‘async1 end’)；接着取微任务队列中第二个任务：console.log(‘promise2’)，并执行，输出：</p>
-<blockquote>
-<p>promise2</p>
-</blockquote>
-<p>接着取第三个任务，并执行，输出：</p>
-<blockquote>
-<p>async1 end</p>
-</blockquote>
-<p>至此，微任务队列清空，接着执行宏任务，即setTimeout，输出：</p>
-<blockquote>
-<p>setTimeout</p>
-</blockquote>
-<p>综上，结果为：</p>
-<blockquote>
-<p>script start<br>async1 start<br>async2<br>promise1<br>script end<br>promise2<br>async1 end<br>setTimeout  </p>
-</blockquote>
+<p>至此，同步任务全部完成，js引擎空闲，开始轮询异步事件队列，首先取到的是微任务队列中的第一个任务：async2返回的那个promise对象的resolve()，执行该任务，对应的promise对象的状态变为Resolved，于是又向微任务队列中增加一个事件（也就是第三个任务）：promise.then()，而这个then执行的就是async1中后续代码，即本例中 console.log(‘async1 end’)；接着取微任务队列中第二个任务：console.log(‘promise2’)，并执行，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise2</span><br></pre></td></tr></table></figure></p>
+<p>接着取第三个任务，并执行，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">async1 end</span><br></pre></td></tr></table></figure></p>
+<p>至此，微任务队列清空，接着执行宏任务，即setTimeout，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
+<p>综上，结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">script start  </span><br><span class="line">async1 start  </span><br><span class="line">async2  </span><br><span class="line">promise1  </span><br><span class="line">script end  </span><br><span class="line">promise2  </span><br><span class="line">async1 end  </span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
 <p>有待深究处：await后的表达式，返回的promise对象的状态改变时机（也就是执行resolve()时机，网上有种说法是“await表达式返回的promise对象的解析行为”），为什么是微任务，而不是直接执行resolve()（也就是紧跟本例中“console.log(‘async2’)”之后）。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjknz2kq30003ztzxss2j9hsz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjknz5ciw00030vzxmpp44hju" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
