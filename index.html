@@ -99,11 +99,13 @@
 <p>至此，微任务队列清空，接着执行宏任务，即setTimeout，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
 <p>综上，结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">script start  </span><br><span class="line">async1 start  </span><br><span class="line">async2  </span><br><span class="line">promise1  </span><br><span class="line">script end  </span><br><span class="line">promise2  </span><br><span class="line">async1 end  </span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
 <p>有待深究处：await后的表达式，返回的promise对象的状态改变时机（也就是执行resolve()时机，网上有种说法是“await表达式返回的promise对象的解析行为”），为什么是微任务，而不是直接执行resolve()（也就是紧跟本例中“console.log(‘async2’)”之后）。</p>
+<p>20180810补充：<br>纯node环境，最新测试结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">script start  </span><br><span class="line">async1 start  </span><br><span class="line">async2  </span><br><span class="line">promise1  </span><br><span class="line">script end</span><br><span class="line">async1 end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
+<p>原因未知，貌似v8内核中并无macrotask的概念，macrotask是在浏览器环境手动实现的，可能与此有关……</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjknz8vkd00032bzxl0x1ipcv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjknzvwt8000345zxs20vep7l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -145,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/quick-sort/" data-id="cjknz8vk900012bzx4hmhuxk6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/quick-sort/" data-id="cjknzvwt4000145zxnijt6en6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -192,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/hello-world/" data-id="cjknz8vk500002bzx6kg8miot" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/hello-world/" data-id="cjknzvwt0000045zxdrthmml2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/other/">other</a></li></ul>
