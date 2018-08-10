@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="启式空间">
 <meta property="og:description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-10T12:35:14.000Z">
+<meta property="og:updated_time" content="2018-08-10T12:38:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对一道头条面试题的个人理解（await、promise、setTimeout等）">
 <meta name="twitter:description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
@@ -95,7 +95,7 @@
 <hr>
 <p>先输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">script start  </span><br><span class="line">async1 start  </span><br><span class="line">async2</span><br></pre></td></tr></table></figure></p>
 <p>至此，函数async2执行完成，返回一个promise对象（但由于await的异步机制，该对象的resolve()作为微任务进入异步队列），async1直接跳出，继续输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">promise1  </span><br><span class="line">script end</span><br></pre></td></tr></table></figure></p>
-<p><em>（注：输出’promise1’后执行resolve，向微任务队列增加一个异步事件<br>console.log(‘promise2’)，此时微任务队列中存了两个事件）</em>  </p>
+<p><em>（注：输出’promise1’后执行resolve，向微任务队列增加一个异步事件console.log(‘promise2’)，此时微任务队列中存了两个事件）</em>  </p>
 <p>至此，同步任务全部完成，js引擎空闲，开始轮询异步事件队列，首先取到的是微任务队列中的第一个任务：async2返回的那个promise对象的resolve()，执行该任务，对应的promise对象的状态变为Resolved，于是又向微任务队列中增加一个事件（也就是第三个任务）：promise.then()，而这个then执行的就是async1中后续代码，即本例中 console.log(‘async1 end’)；接着取微任务队列中第二个任务：console.log(‘promise2’)，并执行，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise2</span><br></pre></td></tr></table></figure></p>
 <p>接着取第三个任务，并执行，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">async1 end</span><br></pre></td></tr></table></figure></p>
 <p>至此，微任务队列清空，接着执行宏任务，即setTimeout，输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
@@ -105,7 +105,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjknz5ciw00030vzxmpp44hju" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjknz8vkd00032bzxl0x1ipcv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
