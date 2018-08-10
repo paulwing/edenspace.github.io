@@ -5,16 +5,20 @@
   
 
   
-  <title>启式空间</title>
+  <title>对一道头条面试题的个人理解（await、promise、setTimeout等） | 启式空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="前端 算法">
-<meta property="og:type" content="website">
-<meta property="og:title" content="启式空间">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对一道头条面试题的个人理解（await、promise、setTimeout等）">
+<meta property="og:url" content="http://yoursite.com/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/index.html">
 <meta property="og:site_name" content="启式空间">
+<meta property="og:description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-10T12:33:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="启式空间">
+<meta name="twitter:title" content="对一道头条面试题的个人理解（await、promise、setTimeout等）">
+<meta name="twitter:description" content="1234567891011121314151617181920212223242526async function async1()&amp;#123;    console.log(&amp;apos;async1 start&amp;apos;)    await async2()    console.log(&amp;apos;async1 end&amp;apos;)&amp;#125;async function async2()&amp;">
   
     <link rel="alternate" href="/atom.xml" title="启式空间" type="application/atom+xml">
   
@@ -65,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-对一道头条面试题的个人理解（await、promise、setTimeout等）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-对一道头条面试题的个人理解（await、promise、setTimeout等）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/" class="article-date">
   <time datetime="2018-08-10T12:18:16.000Z" itemprop="datePublished">2018-08-10</time>
@@ -80,8 +82,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/10/对一道头条面试题的个人理解（await、promise、setTimeout等）/">对一道头条面试题的个人理解（await、promise、setTimeout等）</a>
+    <h1 class="article-title" itemprop="name">
+      对一道头条面试题的个人理解（await、promise、setTimeout等）
     </h1>
   
 
@@ -129,100 +131,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-quick-sort" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/10/quick-sort/" class="article-date">
-  <time datetime="2018-08-10T10:37:16.000Z" itemprop="datePublished">2018-08-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/10/quick-sort/">快速排序算法js实现（双路快排）</a>
-    </h1>
+    <a href="/2018/08/10/quick-sort/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">快速排序算法js实现（双路快排）</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>代码如下</p>
-</blockquote>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function quickSort(arr, a, b)&#123;</span><br><span class="line">	var left = a,right = b;</span><br><span class="line">	var flagIndex = left;</span><br><span class="line">	if (a &gt;= b) &#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	while (left &lt; right) &#123;</span><br><span class="line">		if (arr[left] &gt; arr[right]) &#123;</span><br><span class="line">			var temp;</span><br><span class="line">			temp = arr[left];</span><br><span class="line">			arr[left] = arr[right];</span><br><span class="line">			arr[right] = temp;</span><br><span class="line">			flagIndex = flagIndex == left ? right : left;</span><br><span class="line">		&#125;</span><br><span class="line">		if (arr[flagIndex] == arr[left]) &#123;</span><br><span class="line">			right--;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			left++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	quickSort(arr, a, flagIndex-1);</span><br><span class="line">	quickSort(arr, flagIndex+1, b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/quick-sort/" data-id="cjknz2kpx0001ztzxkqzqlzi7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/10/hello-world/" class="article-date">
-  <time datetime="2018-08-10T03:35:16.000Z" itemprop="datePublished">2018-08-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/10/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/hello-world/" data-id="cjknz2kpt0000ztzxtz327k07" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/other/">other</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
