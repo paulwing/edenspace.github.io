@@ -101,11 +101,12 @@
 <p>“你的字符串（其实）为 ‘<font color="red">空字符</font>a<font color="red">空字符</font>b<font color="red">空字符</font>c<font color="red">空字符</font>d<font color="red">空字符</font>e<font color="red">空字符</font>A<font color="red">空字符</font>c<font color="red">空字符</font>f<font color="red">空字符</font>‘<br><br><br>说明：(?&lt;=前缀&lt;只参与匹配不显示&gt;)目标字符串(?=后缀&lt;只参与匹配不显示&gt;)<br>你的那个第二种情况不用说了<br>匹配结果为两个<br>b(c)<br>A(c)<br>满足\w?(紧接着一个不显示的c)<br>括号里面的不显示 只参与匹配<br><br><br>第一种情况 你一共有四个输出结果<br>c  </p>
 <p><font color="red">空字符</font>(cd之间)<br>c  </p>
 <p><font color="red">空字符</font>(cA之间)<br>你的正则【\w?(?&lt;=c&lt;空字符前缀&gt;)<font color="red">空字符</font>】意思就是【一个字符(一个只参与匹配不参与显示的c&lt;空字符前缀&gt;)<font color="red">空字符</font>】<br>【一个可以出现可以不出现的字符 中间一个不显示的c <font color="red">空字符</font>】<br>因为上面我说了 (?&lt;=XXX) 是作为前缀使用的 <font color="red">而你正则后面没有指定字符</font> 那么那就用空字符作为前缀 就像我上面列出来的说明一样<br>开始匹配<br>匹配a只满足\w? 然后需要一个<font color="red">空字符</font>的前缀c  a!=c =&gt; 不满足<br>匹配b只满足\w? 然后需要一个<font color="red">空字符</font>的前缀c  b!=c =&gt; 不满足<br>匹配c满足\w? 然后需要一个空字符的前缀c  c=c =&gt; 满足<br>注意 上面你的原始字符串之间都有<font color="red">空字符</font>只是不满足条件 就没有列出来(正则会把字符两遍认为有一个<font color="red">空字符</font>)<br>然后原始字符串c后面的一个<font color="red">空字符</font> 满足你正则里面的 <font color="red">空字符</font> 并且前面是一个不需要显示的c而再前面是\w?(?表示可以不出现) 所以满足条件【正则从右往左看匹配容易理解】<br>后面同理<br>”</p>
-
+<p>最后附一个本人写的格式化带小数点的数字的正则（主要利用了零宽断言）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replace(/(?&lt;!(\d)?\.(\d)*)(\d)(?=(\d&#123;3&#125;)+(\.|\b))/g, &apos;$3,&apos;)</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/21/正则表达式零宽断言相关理解/" data-id="cjl3c70xy000465zx2dm28r7h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/21/正则表达式零宽断言相关理解/" data-id="cjl3fyi4700048tzx128alyts" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -147,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/quick-sort/" data-id="cjl3c70xs000165zxhhg7b9s7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/quick-sort/" data-id="cjl3fyi4600038tzxiltq6a1h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -194,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/hello-world/" data-id="cjl3c70xn000065zxixmn5hm7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/10/hello-world/" data-id="cjl3fyi3y00008tzx6b0p24ed" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/other/">other</a></li></ul>
@@ -244,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/30/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjl3c70xw000365zxxb4sd43a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/30/对一道头条面试题的个人理解（await、promise、setTimeout等）/" data-id="cjl3fyi4200018tzxfzsbb09a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
