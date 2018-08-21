@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="启式空间">
 <meta property="og:description" content="先来看一段代码: 1234foreach (Match m in Regex.Matches(&amp;quot;abcdeAcf&amp;quot;, @&amp;quot;\w?(?=c)&amp;quot;, RegexOptions.None))&amp;#123;    Response.Write(m.Value + &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;);&amp;#125; 上面这段代码输入结果估计很容易就能得出：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T06:33:47.000Z">
+<meta property="og:updated_time" content="2018-08-21T06:34:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式零宽断言相关理解">
 <meta name="twitter:description" content="先来看一段代码: 1234foreach (Match m in Regex.Matches(&amp;quot;abcdeAcf&amp;quot;, @&amp;quot;\w?(?=c)&amp;quot;, RegexOptions.None))&amp;#123;    Response.Write(m.Value + &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;);&amp;#125; 上面这段代码输入结果估计很容易就能得出：">
@@ -102,7 +102,7 @@
 <p>\w?(?&lt;=c)</p>
 </blockquote>
 <p>结果会是什么呢？我一开始是懵逼的。试了下，结果是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c  </span><br><span class="line">&lt;br /&gt;</span><br><span class="line">c  </span><br><span class="line">&lt;br /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c  </span><br><span class="line"></span><br><span class="line">c</span><br></pre></td></tr></table></figure>
 <p>看到结果，更懵逼了。直到看到了下边的解释：</p>
 <p>“你的字符串（其实）为 ‘<font color="red">空字符</font>a<font color="red">空字符</font>b<font color="red">空字符</font>c<font color="red">空字符</font>d<font color="red">空字符</font>e<font color="red">空字符</font>A<font color="red">空字符</font>c<font color="red">空字符</font>f<font color="red">空字符</font>‘<br><br><br>说明：(?&lt;=前缀&lt;只参与匹配不显示&gt;)目标字符串(?=后缀&lt;只参与匹配不显示&gt;)<br>你的那个第二种情况不用说了<br>匹配结果为两个<br>b(c)<br>A(c)<br>满足\w?(紧接着一个不显示的c)<br>括号里面的不显示 只参与匹配<br><br><br>第一种情况 你一共有四个输出结果<br>c  </p>
 <p><font color="red">空字符</font>(cd之间)<br>c  </p>
@@ -111,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/21/正则表达式零宽断言相关理解/" data-id="cjl3c2ymj00043hzx0zkm3ty4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/21/正则表达式零宽断言相关理解/" data-id="cjl3c41ry00044ezxfa2gm47u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
